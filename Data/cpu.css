@@ -1,32 +1,108 @@
-#control {}
-
-#prosessor {}
-
-#registers {}
-
-#alu {}
-
-#memory {}
-
-#input {}
-
-#output {}
-
-#cpu {
-    left: 100px;
-    top: 50px;
-    width: 350px;
-    height: 350px;
-    background-color: bisque;
-    border: solid black;
-    border-radius: 10px;
-}
-
-.firkant {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100px;
-    height: 100px;
-    background-color: pink;
-}
+              #control {
+                  left: 95px;
+                  top: 40px;
+                  width: 150px;
+                  height: 70px;
+                  background-color: lightblue;
+                  border: solid black;
+                  border-radius: 5px;
+                  text-align: center;
+              }
+              
+              #prosessor {
+                  left: 65px;
+                  top: 150px;
+                  width: 220px;
+                  height: 190px;
+                  background-color: lightyellow;
+                  border: solid black;
+                  border-radius: 10px;
+              }
+              
+              #registers {
+                  left: 55px;
+                  top: 30px;
+                  width: 100px;
+                  height: 50px;
+                  background-color: lightblue;
+                  border: solid black;
+                  border-radius: 5px;
+              }
+              
+              #alu {
+                  left: 55px;
+                  top: 103px;
+                  width: 100px;
+                  height: 55px;
+                  background-color: lightblue;
+                  border: solid black;
+                  border-radius: 5px;
+              }
+              
+              #memory {
+                  left: 210px;
+                  top: 450px;
+                  width: 130px;
+                  height: 70px;
+                  background-color: lightblue;
+                  border: solid black;
+                  border-radius: 5px;
+              }
+              
+              #input {
+                  left: -40px;
+                  top: 302px;
+                  height: 50px;
+                  background-color: lightblue;
+                  border: solid black;
+                  border-radius: 5px;
+              }
+              
+              #output {
+                  left: 500px;
+                  top: 302px;
+                  width: 75px;
+                  height: 50px;
+                  background-color: lightblue;
+                  border: solid black;
+                  border-radius: 5px;
+              }
+              
+              #cpu {
+                  left: 100px;
+                  top: 50px;
+                  width: 350px;
+                  height: 380px;
+                  background-color: bisque;
+                  border: solid black;
+                  border-radius: 10px;
+              }
+              
+              .firkant {
+                  position: absolute;
+                  left: 0;
+                  top: 0;
+                  width: 100px;
+                  height: 100px;
+                  text-align: center;
+              }
+              
+              .pil {
+                  position: absolute;
+                  width: 300px;
+                  height: 300px;
+                  left: 0;
+                  top: 0;
+              }
+              
+              .oh {
+                  border-top: solid 2px red;
+                  border-right: solid 2px red;
+              }
+              
+              .pil:nth-child(1) {
+                  left: 353px;
+                  top: 115px;
+                  width: 189px;
+                  height: 187px;
+              }
