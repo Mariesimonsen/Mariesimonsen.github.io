@@ -1,0 +1,32 @@
+#control {}
+
+#prosessor {}
+
+#registers {}
+
+#alu {}
+
+#memory {}
+
+#input {}
+
+#output {}
+
+#cpu {
+    left: 100px;
+    top: 50px;
+    width: 350px;
+    height: 350px;
+    background-color: bisque;
+    border: solid black;
+    border-radius: 10px;
+}
+
+.firkant {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100px;
+    height: 100px;
+    background-color: pink;
+}

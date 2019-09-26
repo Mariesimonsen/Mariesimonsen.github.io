@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Datamaskinens oppbygning</title>
+</head>
+
+<link rel="stylesheet" href="data.css">
+
+<body>
+    <script>
+        function hide(e) {
+            let t = document.getElementById("hide");
+            t.style.position = "relative";
+            let left = +(t.style.left.replace("px", "")) + 20;
+            t.style.left = left + "px";
+        }
+
+        function helpme() {
+            // alert("HELP ME");
+            document.location.href = "https://vg.no";
+        }
+    </script>
+    <header>
+        <h1>Datamaskinens oppbygning og virkemåte</h1>
+        <button onclick="helpme()" onmouseover="hide()">helpme</button>
+    </header>
+
+    <main>
+        <article>
+            <h1>Prosessor</h1>
+            <div>
+                <p>
+                    En CPU (engelsk forkortelse for Central Prosessing Unit), også kalt prosessor.
+                    <br> Prosessoren er hjernen i datamaskinen og utfører instruksjonene gitt i et dataprogram.
+                    <br>Hastigheten på en CPU er mellom 2 - 4 GHz for nye maskiner.
+                    <br> Prosessoren har typisk to logiske bestanddeler: styreenheten og utførelsesenheten.
+                </p>
+                <h1>Intel</h1>
+                <p>
+                    Intel er en amerikans produsent av mikroprosessorer.
+                    <br> Firmaet ble grunnlagt i 1968. Selskapet var verdens største innen halvlederteknologi
+                    <br> frem til det ble forbigått av Samsung i 2017.
+                    <br> Laget intel 4004 CPU, 4 bits CPU.
+                    <br> Dagens CPUer er 64bit. 4 bit gir 2^4 som største tall = 16.
+                    <br> For 5-6 år siden var standardstørrelse 32 bit (som hadde tall på 4294967296).
+                    <br> Dagens CPU kan jobbe med tall på 2^64 = 18446744073709551616(L)
+                    <br> -> L bak betyr at det er et langt desimaltall.
+                    <div>
+                        <!--Bilde av en 8086-->
+                        <img src="Intel8086.jpg" alt="Intel">
+                    </div>
+                </p>
+
+                <h1>AMD</h1>
+                <p>
+                    Avanced Mikro Devices (AMD) er en amerikans storprodusent av mikroprosessorer.
+                    <br> Selskapet ble grunnlagt i 1969. Hovedkonkurrenten er Intel.
+                    <br> Laget sin første CPU 8080 AM9080 (en klone av inel 8080).
+                    <div>
+                        <!--bilde av en amd valgfritt-->
+                        <img src="AMD.jpg" alt="AMD">
+                    </div>
+                </p>
+
+                <h1>ARM</h1>
+                <p>
+                    ARM-arkitekturen er en Reduced instruction set computer (RISK) instruksjonssett-arkitektur
+                    <br> utviklet av ARM-holdings som er brukt i et stort antall produkter.
+                    <br> Et karakteristisk trekk med ARMs prosessorer er deres lave strømforbruk,
+                    <br> noe som gjør dem spesielt egnet for bruk i bærbare enheter (Brukes i mobiler).
+                    <br> RISK CPUer har få og enkle instruksjoner (i motsetning til Intel). Hver instruksjonen
+                    <br> skal ta minst mulig tid. Kompliserte beregninger består av mange instruksjoner.
+                </p>
+
+            </div>
+        </article>
+        <article>
+            <h1>RAM og ROM</h1>
+            <div>
+                <p>
+                    RAM er en forkortelse som betyr Random Access Memory (kan gå inn hvor du vil og finne filer).
+                </p>
+            </div>
+        </article>
+        <article>
+            <h1>Lagring</h1>
+            <div>
+                <p>
+                    Standard læringsmedia Idag er SSD. Tidligere (for få år siden) var HDD det mest brukte.
+                </p>
+            </div>
+        </article>
+        <article>
+            <h1>Etc</h1>
+        </article>
+    </main>
+    <footer>
+        Denne sida er laget av ah med vscode
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,15 @@
+article {
+    line-height: 30px;
+}
+
+article h1 {
+    color: pink;
+}
+
+article>h1 {
+    color: palevioletred
+}
+
+img {
+    width: 12em;
+}
