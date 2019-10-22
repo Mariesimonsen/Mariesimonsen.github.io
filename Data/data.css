@@ -13,3 +13,19 @@ article>h1 {
 img {
     width: 12em;
 }
+
+td,
+th,
+table {
+    border: solid gray 1px;
+    border-collapse: collapse;
+    padding: 8px;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: pink;
+}
+
+th {
+    background-color: lightcyan;
+}

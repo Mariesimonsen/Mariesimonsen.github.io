@@ -50,16 +50,17 @@
               }
               
               #input {
-                  left: -40px;
+                  left: 12px;
                   top: 302px;
                   height: 50px;
+                  width: 72px;
                   background-color: lightblue;
                   border: solid black;
                   border-radius: 5px;
               }
               
               #output {
-                  left: 500px;
+                  left: 471px;
                   top: 302px;
                   width: 75px;
                   height: 50px;
@@ -101,8 +102,8 @@
               }
               
               .pil:nth-child(1) {
-                  left: 353px;
-                  top: 115px;
-                  width: 189px;
+                  left: 354px;
+                  top: 113px;
+                  width: 156px;
                   height: 187px;
               }

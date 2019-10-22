@@ -1,0 +1,128 @@
+:root {
+    --walktime: 40s;
+}
+
+header h1 {
+    color: pink;
+    text-align: center;
+}
+
+main {
+    height: 70vh;
+}
+
+header {
+    height: 10vh;
+}
+
+footer {
+    height: 10vh;
+}
+
+#verden {
+    height: 70vh;
+}
+
+#himmel {
+    position: relative;
+    height: 80%;
+    background-color: rgb(113, 186, 228);
+}
+
+#person {
+    position: absolute;
+    opacity: 1.0;
+    left: 60px;
+    bottom: 40px;
+    width: 112px;
+    height: 112px;
+    background-image: url("puppet.png");
+    background-position-x: 0;
+    background-position-y: calc(-112px * 2);
+    animation: walk 1.4s steps(8) infinite, slide var(--walktime) linear forwards;
+}
+
+@keyframes walk {
+    100% {
+        background-position-x: calc( -112px * 8);
+    }
+}
+
+@keyframes slide {
+    0% {
+        left: 80px;
+        opacity: 1;
+    }
+    99.9% {
+        left: 80vw;
+        opacity: 1;
+    }
+    100% {
+        left: 65vw;
+        opacity: 0;
+    }
+}
+
+#jord {
+    position: relative;
+    height: 20%;
+    background-color: burlywood;
+}
+
+#sol {
+    position: absolute;
+    top: 80px;
+    left: calc(50% - 20px);
+    width: 40px;
+    height: 40px;
+    background-color: rgb(240, 240, 99);
+    border-radius: 50%;
+    animation: flimmer 1s infinite alternate;
+}
+
+@keyframes flimmer {
+    100% {
+        width: 43px;
+        height: 43px;
+    }
+}
+
+#kaktus {
+    position: absolute;
+    right: 110px;
+    bottom: 30px;
+    height: 240px;
+    width: 500px;
+    background-image: url("kaktus.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+#skjelett {
+    position: absolute;
+    right: 30px;
+    bottom: 20px;
+    height: 120px;
+    width: 500px;
+    background-image: url("skjelett.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    animation: hide var(--walktime) linear forwards;
+}
+
+@keyframes hide {
+    0% {
+        left: 60px;
+        opacity: 0;
+    }
+    99.9% {
+        left: 70vw;
+        opacity: 0;
+    }
+    100% {
+        left: 70vw;
+        opacity: 1;
+    }
+}
