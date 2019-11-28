@@ -1,0 +1,23 @@
+                                #main {
+                                    width: 800px;
+                                    height: 600px;
+                                    border: solid grey;
+                                    grid-template-columns: 1fr 1fr 1fr;
+                                    grid-template-rows: 50px 50px 50px;
+                                    grid-template-areas: "aa . . ccc" "aa . .ccc" "aa.bbbbbbbb.ccc" "aa.bbbbbbbb.ccc" "aa . . ." "aa. . ." "aa. . .";
+                                }
+                                
+                                #a {
+                                    background-color: blue;
+                                    grid-area: aa;
+                                }
+                                
+                                #b {
+                                    background-color: red;
+                                    grid-area: bbbbbbbb;
+                                }
+                                
+                                div.c {
+                                    background-color: yellow;
+                                    grid-area: ccc;
+                                }

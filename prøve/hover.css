@@ -1,0 +1,10 @@
+h1 {
+    color: blue;
+    background-color: white;
+}
+
+h1:hover {
+    background-color: grey;
+    color: green;
+    transition: 700ms;
+}
