@@ -11,7 +11,7 @@ CREATE TABLE laaner
     kjonn text
 );
 
-CREATE TABLE fortfatter
+CREATE TABLE forfatter
 (
     forfatterid serial primary key,
     fornavn text not null,

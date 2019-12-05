@@ -1,4 +1,4 @@
-const CONNECTSTRING = "postgres://marie@localhost/bib";
+const CONNECTSTRING = "postgres://bib:marie@localhost/bib";
 
 const PORT = 3000;
 
