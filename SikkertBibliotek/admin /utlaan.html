@@ -31,7 +31,8 @@
     <div id="admin">
         <!-- angi feltnavn du ønsker å bruke i fields="" -->
         <div class="table">
-            <db-table id="table" update="true" fields="fornavn,etternavn,tittel,innlevert" sql="select l.fornavn,l.etternavn,b.tittel,e.tillstand,u.innlevert 
+            <db-table id="table" update="utlaan" delete="utlaan" fields="utlaanid,fornavn,etternavn,tittel,innlevert" 
+            sql="select u.utlaanid,l.fornavn,l.etternavn,b.tittel,e.tillstand,u.innlevert 
              from laaner l inner join utlaan u on (l.laanerid = u.laanerid) 
              inner join eksemplar e on (e.eksemplarid = u.eksemplarid) inner join bok b on (b.bokid=e.bokid)">
                 <span slot="caption">Utlån</span>
@@ -42,7 +43,10 @@
         <db-insert id="form" fields="innlevert:checkbox" foreign="laaner.laanerid:fornavn+etternavn" table="utlaan">
             <span slot="heading">Registrer Utlån</span>
             <db-foreign label="tittel" foreign="eksemplarid"
-                sql="select e.eksemplarid,concat(b.tittel,' av ',f.fornavn, ' ',f.etternavn) as tittel from eksemplar e join bok b on (e.bokid = b.bokid) join forfatter f on (f.forfatterid = b.forfatterid)">
+                sql="select e.eksemplarid,
+                concat(e.eksemplarid,':',b.tittel,' av ',f.fornavn, ' ',f.etternavn,', tillstand:',e.tillstand) as tittel 
+                from eksemplar e join bok b on (e.bokid = b.bokid) 
+                join forfatter f on (f.forfatterid = b.forfatterid)">
             </db-foreign>
         </db-insert>
     </div>

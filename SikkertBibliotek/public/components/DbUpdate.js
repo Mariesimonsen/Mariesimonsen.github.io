@@ -33,6 +33,7 @@
             border-radius: 5px;
             border: solid gray 1px;
             background-color: whitesmoke;
+            text-transform:capitalize;
         }
 
         form  div#foreign label {
@@ -70,6 +71,10 @@
         .hidden {
           display:none;
         }
+        form.invalid  {
+          height: 1em;
+          overflow:hidden;
+        }
         </style>
         <form>
           <div class="heading"><slot name="heading"></slot><div id="number">1</div></div>
@@ -90,8 +95,30 @@
     switch (e.type) {
       case "checkbox":
         return e.checked;
+      case "number":
+        return e.value !== "" ? Number(e.value) : 0;
+      case "date":
+        return e.value;
       default:
         return e.value;
+    }
+  };
+
+  const assignInput = (inp, type, value) => {
+    // NOTE (value == null) covers (value == undefined) also
+    switch (type) {
+      case "checkbox":
+        inp.checked = value !== false;
+        break;
+      case "date":
+        let date = "";
+        date = value == null ? "" : value.split("T")[0];
+        inp.value = date;
+        break;
+      default:
+        let cleanValue = value === null ? "" : value;
+        inp.value = cleanValue;
+        break;
     }
   };
 
@@ -99,9 +126,12 @@
     constructor() {
       super();
       this.rows = [];
+      this.types = {}; // fields need typing so we can store dates and number correctly
       this.idx = 0;
       this.table = "";
+      this.key = "";
       this.update = "";
+      this.connected = "";
       this._root = this.attachShadow({ mode: "open" });
       this.shadowRoot.appendChild(template.content.cloneNode(true));
 
@@ -142,7 +172,7 @@
     }
 
     static get observedAttributes() {
-      return ["table", "key", "fields", "foreign", "update"];
+      return ["table", "key", "fields", "foreign", "update", "connected"];
     }
 
     connectedCallback() {
@@ -159,17 +189,26 @@
       let divForeign = this._root.querySelector("#foreign");
       if (name === "fields") {
         divFields.innerHTML = "";
-        let fieldlist = newValue.split(",");
+        let rawfields = newValue.split(",");
+        let fieldlist = rawfields.map(h => {
+          let [name, type = "text"] = h.split(":");
+          return { name, type };
+        });
         let readonly = this.update === "";
-        for (let i = 0; i < fieldlist.length; i++) {
-          let [name, type = "text", text = ""] = fieldlist[i].split(":");
-          text = (t => t.charAt(0).toUpperCase() + t.substr(1))(text || name);
+        for (let f of fieldlist) {
           let label = document.createElement("label");
-          let disabled = (name === this.key || readonly) ? " disabled" : ""; // can not change key
-          label.innerHTML = `${text} <input type="${type}" id="${name}" ${disabled}>`;
+          let disabled = f.name === this.key || readonly ? " disabled" : ""; // can not change key
+          label.innerHTML = `${f.name} <input type="${f.type}" id="${f.name}" ${disabled}>`;
           divFields.appendChild(label);
         }
-        this.fieldlist = fieldlist.map(e => this._root.querySelector("#" + e));
+        this.fieldlist = fieldlist.map(e =>
+          this._root.querySelector("#" + e.name)
+        );
+        this.fields = fieldlist.map(e => e.name);
+        this.types = fieldlist.reduce((s, e) => {
+          s[e.name] = e.type;
+          return s;
+        }, {});
       }
       if (name === "table") {
         this.table = newValue;
@@ -177,13 +216,47 @@
       if (name === "update") {
         this.update = newValue;
         this._root.querySelector("label.hidden").classList.remove("hidden");
-        // Array.from(this._root.querySelectorAll("input")).forEach(e => e.setAttribute("disabled","true"));
-      }
-      if (name === "fields") {
-        this.fields = newValue;
       }
       if (name === "key") {
         this.key = newValue;
+      }
+      if (name === "connected") {
+        this.connected = newValue;
+        // this component depends on another
+        this._root.querySelector("#next").classList.add("hidden");
+        this._root.querySelector("#prev").classList.add("hidden");
+        addEventListener("dbUpdate", e => {
+          let source = e.detail.source;
+          let [id, field] = this.connected.split(":");
+          if (id !== source) return; // we are not interested
+          let dbComponent = document.getElementById(id);
+          if (dbComponent) {
+            // component found - get its value
+            let value = dbComponent.value || "";
+            if (value !== "") {
+              let intvalue = Math.trunc(Number(value));
+              let rows = this.rows;
+              let key = this.key;
+              if (rows.length && key) {
+                // find correct idx
+                for (let i = 0; i < rows.length; i++) {
+                  let r = rows[i];
+                  if (r[key] === intvalue) {
+                    // found correct row
+                    this.idx = i;
+                    this.show();
+                    return;
+                  }
+                }
+              }
+            } else {
+              // we must redraw as empty
+              this._root.querySelector("form").classList.add("invalid");
+              this.idx = undefined;
+              this.trigger({}); // cascade
+            }
+          }
+        });
       }
       if (name === "foreign") {
         divForeign.innerHTML = "";
@@ -201,20 +274,29 @@
       }
     }
 
+    trigger(detail) {
+      detail.source = this.id;
+      this.dispatchEvent(
+        new CustomEvent("dbUpdate", {
+          bubbles: true,
+          composed: true,
+          detail
+        })
+      );
+    }
+
     show() {
       // places data for row[idx] in form for editing
+      this._root.querySelector("form").classList.remove("invalid");
       if (this.rows.length && this.fieldlist.length) {
         let current = this.rows[this.idx];
-        this.fieldlist.forEach(e => (e.value = current[e.id]));
+        //assignInput
+        this.fieldlist.forEach(e =>
+          assignInput(e, this.types[e.id], current[e.id])
+        );
         this._root.querySelector("#number").innerHTML =
           "#" + String(this.idx + 1);
-        this.dispatchEvent(
-          new CustomEvent("dbUpdate", {
-            bubbles: true,
-            composed: true,
-            detail: "upsert"
-          })
-        );
+        this.trigger({ source: this.id, table: this.table });
       }
     }
 
@@ -236,7 +318,7 @@
         fetch("/runsql", init)
           .then(r => r.json())
           .then(data => {
-            console.log(data);
+            // console.log(data);
             let list = data.results;
             if (list.length) {
               this.rows = list;
@@ -263,7 +345,7 @@
       fetch("/runsql", init)
         .then(r => r.json())
         .then(data => {
-          console.log(data);
+          //console.log(data);
           let list = data.results;
           if (list.length) {
             let options = list
@@ -284,7 +366,7 @@
           "Content-Type": "application/json"
         }
       };
-      console.log(sql, data);
+      //console.log(sql, data);
       fetch("/runsql", init)
         .then(() =>
           // others may want to refresh view
@@ -292,7 +374,7 @@
             new CustomEvent("dbUpdate", {
               bubbles: true,
               composed: true,
-              detail: "upsert"
+              detail: { source: this.id, table: this.table }
             })
           )
         )

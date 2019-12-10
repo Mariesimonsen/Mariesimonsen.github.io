@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Registrer forfatter</title>
+    <title>Registrer Eksemplar</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="/components/DbInsert.js"></script>
     <script src="/components/DbTable.js"></script>
@@ -16,24 +16,27 @@
 
 <body>
 
-    <home-bar heading="Skolebibliotek Skeisvang" crumb="forfatter" getlinks="/htmlfiler/admin" username="/myself">
+    <home-bar heading="Skolebibliotek Skeisvang" crumb="eksemplar" getlinks="/htmlfiler/admin" username="/myself"">
     </home-bar>
-
 
     <div id="admin">
 
-
         <div class="table">
-            <db-table id="table" update="true" fields="fornavn,etternavn" sql="select * from forfatter">
-                <span slot="caption">Forfattere</span>
+            <db-table id="table" update="eksemplar" delete="eksemplar" fields="eksemplarid,tittel,tillstand,bokid"
+                sql="select e.*, b.tittel from eksemplar e join bok b on (e.bokid = b.bokid)">
+                <span slot="caption">Eksemplar</span>
             </db-table>
         </div>
 
-        <db-insert id="form" fields="fornavn,etternavn" table="forfatter">
-            <span slot="heading">Registrer Forfatter</span>
+        <db-insert id="form" fields="tillstand" table="eksemplar">
+            <span slot="heading">Registrer eksemplar</span>
+
+            <db-foreign label="tittel" foreign="bokid" sql="select bokid,tittel from bok">
+            </db-foreign>
+
         </db-insert>
 
-    </div>
+        </div>
 
 
 </body>
