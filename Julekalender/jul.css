@@ -1,0 +1,131 @@
+h1 {
+    color: red;
+    height: 8vh;
+    text-align: center;
+}
+
+body {
+    background-color: whitesmoke;
+}
+
+#julekal {
+    background-image: url("julebilde2.jpg");
+    background-size: cover;
+    background-position: center;
+    border: solid 1px gray;
+    width: 90vw;
+    height: 80vh;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    place-items: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.luker {
+    width: 90px;
+    height: 70px;
+    border: solid red 1px;
+    text-align: right;
+    background-position: center;
+}
+
+.luker:hover {
+    background-size: cover;
+}
+
+.luker:nth-child(1):hover {
+    background-image: url("julebilde.jpg");
+}
+
+.luker:nth-child(2):hover {
+    background-image: url("julebilde1.jpeg");
+}
+
+.luker:nth-child(3):hover {
+    background-image: url("julebilde3.gif");
+}
+
+.luker:nth-child(4):hover {
+    background-image: url("julebilde4.jpg");
+}
+
+.luker:nth-child(5):hover {
+    background-image: url("julebilde5.gif");
+}
+
+.luker:nth-child(6):hover {
+    background-image: url("julebilde6.webp");
+}
+
+.luker:nth-child(7):hover {
+    background-image: url("julebilde7.jpg");
+}
+
+.luker:nth-child(8):hover {
+    background-image: url("julebilde8.jpg");
+}
+
+.luker:nth-child(9):hover {
+    background-image: url("julebilde9.gif");
+}
+
+.luker:nth-child(10):hover {
+    background-image: url("julebilde10.gif");
+}
+
+.luker:nth-child(11):hover {
+    background-image: url("julebilde11.jpg");
+}
+
+.luker:nth-child(12):hover {
+    background-image: url("julebilde12.jpg");
+}
+
+.luker:nth-child(13):hover {
+    background-image: url("julebilde13.jpg");
+}
+
+.luker:nth-child(14):hover {
+    background-image: url("julebilde14.jpg");
+}
+
+.luker:nth-child(15):hover {
+    background-image: url("julebilde15.jpg");
+}
+
+.luker:nth-child(16):hover {
+    background-image: url("julebilde16.gif");
+}
+
+.luker:nth-child(17):hover {
+    background-image: url("julebilde17.gif");
+}
+
+.luker:nth-child(18):hover {
+    background-image: url("julebilde18.gif");
+}
+
+.luker:nth-child(19):hover {
+    background-image: url("julebilde19.gif");
+}
+
+.luker:nth-child(20):hover {
+    background-image: url("julebilde20.gif");
+}
+
+.luker:nth-child(21):hover {
+    background-image: url("julebilde21.gif");
+}
+
+.luker:nth-child(22):hover {
+    background-image: url("julebilde22.gif");
+}
+
+.luker:nth-child(23):hover {
+    background-image: url("julebilde23.gif");
+}
+
+.luker:nth-child(24):hover {
+    background-image: url("julebilde24.gif");
+}
